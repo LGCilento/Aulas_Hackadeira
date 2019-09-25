@@ -1,0 +1,26 @@
+<html>
+    <meta charset="UTF-8">
+    <script language="javascript" type="module">
+        import mqtt from './node_modules/mqtt'
+        var connection = mqtt.connect('ws:127.0.0.1:1883');
+        connection.subscribe('#') 
+
+        connection.onopen = function(){
+            console.log('Connection open!');
+            //connection.send('Hey server, whats up?');
+        }
+        connection.onclose = function(){
+            console.log('Connection closed');
+        }
+        connection.onmessage = function(e){
+            var server_message = e.data;
+            console.log(server_message);
+            document.getElementById("result").innerHTML = "<h3>" + server_message + "</h3>";
+        }
+    </script>
+<body>
+    <form>
+        <div id="result"></result>
+    </form>
+</body>
+<html
